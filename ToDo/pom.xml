@@ -65,7 +65,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>seppopeli.seppopeli.App</mainClass>
+                            <mainClass>ohjelmia.todo.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
