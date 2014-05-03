@@ -43,6 +43,9 @@ public class Kayttis implements Runnable {
         
         JPanel paneeli = new JPanel(new GridLayout(Lista.size(), 1));
         
+        //Boksi lista
+        ArrayList<JCheckBox> boxit = new ArrayList<>();
+        
         for (String string : Lista) {
             JCheckBox check = new JCheckBox(string);
             
@@ -50,10 +53,19 @@ public class Kayttis implements Runnable {
             check.setForeground(Color.BLACK);
             check.setOpaque(true);
             
+            boxit.add(check);
+            
             paneeli.add(check);
         }
         
         container.add(paneeli);
+        
+        //Boksien toiminnallisuus
+        Kuuntelija2 k2 = new Kuuntelija2(frame, Lista, boxit);
+        
+        for (JCheckBox jCheckBox : boxit) {
+            jCheckBox.addActionListener(k2);
+        }
     }
 
     public JFrame getFrame() {
