@@ -19,12 +19,12 @@ public class AlkuValikko implements Runnable {
     public void run() {
         frame = new JFrame("ToDo-list SetUp");
 
-        frame.setPreferredSize(new Dimension(200, 100));
+        frame.setPreferredSize(new Dimension(250, 100));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
-        frame.setLocation((screenSize.width / 2) - 100, (screenSize.height / 2) - 50);
+        frame.setLocation((screenSize.width / 2) - 125, (screenSize.height / 2) - 50);
 
         luoKomponentit(frame.getContentPane());
 
@@ -40,19 +40,23 @@ public class AlkuValikko implements Runnable {
         
         JButton nappi = new JButton("Submit");
         nappi.setMnemonic('s');
+        JButton nappi3 = new JButton("Load");
+        nappi3.setMnemonic('l');
         JButton nappi2 = new JButton("Ready");
         nappi2.setMnemonic('r');
         
-        JPanel paneeli = new JPanel(new GridLayout(1, 2));
+        JPanel paneeli = new JPanel(new GridLayout(1, 3));
         paneeli.add(nappi);
+        paneeli.add(nappi3);
         paneeli.add(nappi2);
 
         container.add(teksti);
         container.add(paneeli);
 
-        Kuuntelija kuuntelija = new Kuuntelija(frame, teksti, nappi, nappi2);
+        Kuuntelija kuuntelija = new Kuuntelija(frame, teksti, nappi, nappi2, nappi3);
         nappi.addActionListener(kuuntelija);
         nappi2.addActionListener(kuuntelija);
+        nappi3.addActionListener(kuuntelija);
     }
 
     public JFrame getFrame() {
