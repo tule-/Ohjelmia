@@ -31,13 +31,13 @@ public class Kuuntelija implements ActionListener {
         this.Nappi3 = nappi3;
         this.Tiedosto = new File("Todo.txt");
         this.lista = new ArrayList<String>();
-        this.K = new Kayttis();
-        
+        this.K = new Kayttis(Tiedosto, lista);
+
         //Tarkastetaan onko todo-tiedostoa olemassa
-        if(!Tiedosto.exists()){
+        if (!Tiedosto.exists()) {
             //Disabloidaan load-nappi
             Nappi3.setEnabled(false);
-        }     
+        }
     }
 
     @Override
@@ -71,7 +71,7 @@ public class Kuuntelija implements ActionListener {
 
             Teksti.setText("");
             Teksti.requestFocus();
-            
+
             //Disabloidaan load-nappi
             Nappi3.setEnabled(false);
 
@@ -86,14 +86,14 @@ public class Kuuntelija implements ActionListener {
             } catch (Exception ex) {
                 Logger.getLogger(Kuuntelija.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             //Listan päivitys
             K.paivitalista(lista);
             K.run();
 
             Teksti.setText("");
             Teksti.requestFocus();
-            
+
             //Disabloidaan load-nappi
             Nappi3.setEnabled(false);
         }
@@ -101,10 +101,10 @@ public class Kuuntelija implements ActionListener {
 
     public void tiedostokirjoittaja() throws Exception {
         FileWriter kirjoittaja = new FileWriter(Tiedosto);
-        
+
         for (String string : lista) {
             kirjoittaja.write(string);
-            
+
             if (lista.indexOf(string) != lista.size() - 1) {
                 kirjoittaja.write(":");
             } else {
@@ -115,19 +115,19 @@ public class Kuuntelija implements ActionListener {
 
     public void luetiedosto() throws Exception {
         Scanner lukija = new Scanner(Tiedosto);
-        
+
         String merkkijono = "";
         String jakaja = ":";
-        
+
         while (lukija.hasNextLine()) {
             String rivi = lukija.nextLine();
             merkkijono = rivi;
         }
         lukija.close();
-        
+
         String[] apu;
         apu = merkkijono.split(jakaja);
-        
+
         for (int i = 0; i < apu.length; i++) {
             lista.add(apu[i]);
         }

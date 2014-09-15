@@ -5,8 +5,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +18,12 @@ public class Kayttis implements Runnable {
     
     private JFrame frame;
     private ArrayList<String> Lista;
+    private File Tiedosto;
+    
+    public Kayttis(File tiedosto, ArrayList<String> lista){
+        this.Tiedosto = tiedosto;
+        this.Lista = lista;
+    }
 
     @Override
     public void run() {
@@ -41,7 +49,16 @@ public class Kayttis implements Runnable {
         BoxLayout layout = new BoxLayout(container, BoxLayout.Y_AXIS);
         container.setLayout(layout);
         
-        JPanel paneeli = new JPanel(new GridLayout(Lista.size(), 1));
+        JPanel paneeli = new JPanel(new GridLayout(Lista.size()+1, 1));
+        JPanel paneeli2 = new JPanel(new GridLayout(1, 2));
+        
+        JButton editnappi = new JButton("Edit");
+        JButton loadnappi = new JButton("Load");
+        
+        paneeli2.add(editnappi);
+        paneeli2.add(loadnappi);
+        
+        paneeli.add(paneeli2);
         
         //Boksi lista
         ArrayList<JCheckBox> boxit = new ArrayList<>();
@@ -61,7 +78,10 @@ public class Kayttis implements Runnable {
         container.add(paneeli);
         
         //Boksien toiminnallisuus
-        Kuuntelija2 k2 = new Kuuntelija2(frame, Lista, boxit);
+        Kuuntelija2 k2 = new Kuuntelija2(frame, Lista, boxit, editnappi, loadnappi, Tiedosto);
+        
+        editnappi.addActionListener(k2);
+        loadnappi.addActionListener(k2);
         
         for (JCheckBox jCheckBox : boxit) {
             jCheckBox.addActionListener(k2);
