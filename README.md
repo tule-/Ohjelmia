@@ -1,9 +1,7 @@
 Sekalaisia Ohjelmia
 -------------------
 
--ToDo: 
-       v1.0:
-       Ohjelma jonka avulla voit helposti tehdä listan työpöydän yläkulmaan.
+-ToDo: Ohjelma jonka avulla voit helposti tehdä listan työpöydän yläkulmaan.
        Ohjelma ymmärtää pikakomennot alt+s (submit), alt+r (ready) ja alt+l(load).
        Lista tunnistaa checkatut komponentit ja kun kaikki on checkattu lista sulkeutuu.
 
